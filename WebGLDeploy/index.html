@@ -50,12 +50,13 @@
         updateBannerVisibility();
       }
 
-      var cdn = "https://cdn.jsdelivr.net/gh/Sasukrystal/1@webgl-cdn/Build";
-      var loaderUrl = cdn + "/WebGL.loader.js";
+      // Same-origin Build/ avoids Edge Tracking Prevention blocking third-party IndexedDB.
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
-        dataUrl: "https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build/WebGL.data.unityweb",
-        frameworkUrl: cdn + "/WebGL.framework.js.unityweb",
-        codeUrl: cdn + "/WebGL.wasm.unityweb",
+        dataUrl: buildUrl + "/WebGL.data.unityweb",
+        frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
+        codeUrl: buildUrl + "/WebGL.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DarkDungeon Team",
         productName: "黑暗地牢",

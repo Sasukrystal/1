@@ -26,16 +26,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Assemble WebGL site
+      - name: Assemble WebGL site (same-origin Build/)
         run: |
           set -e
           mkdir -p _site/Build
           cp -r WebGLDeploy/. _site/
-          BASE="https://github.com/Sasukrystal/1/releases/download/webgl-v1.0"
-          curl -fsSL -o _site/Build/WebGL.data.unityweb "$BASE/WebGL.data.unityweb"
-          curl -fsSL -o _site/Build/WebGL.framework.js.unityweb "$BASE/WebGL.framework.js.unityweb"
-          curl -fsSL -o _site/Build/WebGL.wasm.unityweb "$BASE/WebGL.wasm.unityweb"
+          MEDIA="https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build"
+          for f in WebGL.loader.js WebGL.data.unityweb WebGL.framework.js.unityweb WebGL.wasm.unityweb; do
+            echo "Downloading $f ..."
+            curl -fsSL --retry 3 --retry-delay 5 -o "_site/Build/$f" "$MEDIA/$f"
+          done
           ls -lh _site/Build/
+          test "$(stat -c%s _site/Build/WebGL.data.unityweb)" -gt 100000000
 
       - uses: actions/configure-pages@v5
 
