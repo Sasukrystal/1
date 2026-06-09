@@ -50,11 +50,13 @@
         updateBannerVisibility();
       }
 
-      // Same-origin Build/ avoids Edge Tracking Prevention blocking third-party IndexedDB.
+      // loader / wasm / framework same-origin (avoids Edge Tracking Prevention on third-party storage).
+      // data file too large for git; served from GitHub LFS media CDN with CORS.
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
+      var dataCdn = "https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build/WebGL.data.unityweb?v=4";
       var config = {
-        dataUrl: buildUrl + "/WebGL.data.unityweb",
+        dataUrl: dataCdn,
         frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
         codeUrl: buildUrl + "/WebGL.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
