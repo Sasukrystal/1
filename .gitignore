@@ -1,0 +1,57 @@
+# Unity generated folders
+Library/
+Temp/
+Obj/
+Logs/
+UserSettings/
+MemoryCaptures/
+
+# Build output
+Builds/
+Build/
+
+# IDE and editor folders
+.vs/
+.idea/
+
+# Generated project files
+*.csproj
+*.sln
+*.user
+*.pidb
+*.booproj
+
+# Common OS files
+.DS_Store
+Thumbs.db
+
+# External art source archives and raw source files
+/_ExternalArtSources/
+/Assets/new/
+/Assets/Tiny Swords/
+/Assets/Tiny Swords.rar
+*.aseprite
+*.rar
+*.zip
+
+# Local tooling / temp
+__pycache__/
+build.log
+*.psd
+ui_split.png
+/计算机图形学大作业封面.docx
+
+# Dev-only / duplicate assets (runtime uses StreamingAssets copies)
+/Assets/Screenshots/
+/Assets/ArtSource/DevOnly/
+/Assets/music/
+/Assets/*.mp3
+/Assets/generated-sound-*.mp3
+/Assets/_Project/Docs/__pycache__/
+/Tiny Swords/
+
+# Imported art packs (already integrated under Assets/Resources)
+/RogueArt_*/
+/Temp_RogueArt_*/
+/Unity_2D_Roguelike_CoreCombat_FullPack/
+/Unity_2D_Roguelike_CoreCombat_FullPack.zip

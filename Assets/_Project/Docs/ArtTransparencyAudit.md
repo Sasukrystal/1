@@ -1,0 +1,415 @@
+# Art Transparency Audit
+
+Generated: 2026-06-05
+Scope: PNG files under Assets, with runtime roots weighted toward Assets/Resources/Art2D, Assets/Resources/Sprites, and Assets/Sprites.
+
+## Gate Rules
+
+- Do not use screenshots, previews, overviews, contact sheets, or sprite sheets as direct runtime sprites.
+- Do not place images with baked checkerboard backgrounds into scenes or prefabs.
+- Do not place images with baked white backgrounds into scenes or prefabs.
+- World objects must use SpriteRenderer with a verified non-null sprite reference.
+- UI objects must use Image with correct Image Type, Preserve Aspect, RectTransform, and border settings where needed.
+- Every scene or prefab integration must be verified with a GameView screenshot before reporting success.
+
+## Summary
+
+| Category | Count |
+| --- | ---: |
+| SafeRuntimeSprites | 39 |
+| NeedsCrop | 0 |
+| BakedCheckerboardBackground | 0 |
+| BakedWhiteBackground | 296 |
+| SuspectedPreviewOrContactSheet | 25 |
+| NeedsManualReview | 11 |
+
+## SafeRuntimeSprites
+
+- `Assets/Resources/Art2D/Environment/Tiles/Floor_CombatRoom.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Art2D/Environment/Tiles/Floor_Corridor.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Art2D/Environment/Tiles/Floor_Lobby.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Art2D/Environment/Tiles/Floor_ShopRoom.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Art2D/Weapon_WarriorShield.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/apple.png` | size `256x256` | alpha `yes` | transparent margin `0.31` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/armor.png` | size `256x256` | alpha `yes` | transparent margin `0.15` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/axe.png` | size `256x256` | alpha `yes` | transparent margin `0.18` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/b_t_01.png` | size `256x256` | alpha `yes` | transparent margin `0.09` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/bag.png` | size `256x256` | alpha `yes` | transparent margin `0.21` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/belts.png` | size `256x256` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/book.PNG` | size `256x256` | alpha `yes` | transparent margin `0.27` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/boots.png` | size `256x256` | alpha `yes` | transparent margin `0.10` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/bracers.PNG` | size `256x256` | alpha `yes` | transparent margin `0.05` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/cloaks.PNG` | size `256x256` | alpha `yes` | transparent margin `0.02` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/coins.png` | size `256x256` | alpha `yes` | transparent margin `0.10` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/gem.png` | size `250x250` | alpha `yes` | transparent margin `0.45` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/gloves.PNG` | size `256x256` | alpha `yes` | transparent margin `0.14` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/heavy_steel_gloves.png` | size `30x30` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/helmets.png` | size `256x256` | alpha `yes` | transparent margin `0.34` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/hp.png` | size `256x256` | alpha `yes` | transparent margin `0.05` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/ingots.png` | size `250x250` | alpha `yes` | transparent margin `0.12` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/iron_gloves.png` | size `27x28` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/Meat.png` | size `256x256` | alpha `yes` | transparent margin `0.03` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/mp.png` | size `256x256` | alpha `yes` | transparent margin `0.10` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/necklace.PNG` | size `256x256` | alpha `yes` | transparent margin `0.24` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/pants.png` | size `256x256` | alpha `yes` | transparent margin `0.12` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/rings.PNG` | size `256x256` | alpha `yes` | transparent margin `0.02` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/scroll.png` | size `256x256` | alpha `yes` | transparent margin `0.02` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/shield.png` | size `256x256` | alpha `yes` | transparent margin `0.26` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/shoulders.png` | size `256x256` | alpha `yes` | transparent margin `0.16` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/steel_gloves.png` | size `27x28` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/steel_sword.png` | size `34x37` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/sword.png` | size `256x256` | alpha `yes` | transparent margin `0.04` | alpha/background checks passed
+- `Assets/Resources/Sprites/Items/the_great_stick.png` | size `34x37` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Sprites/Backgrounds/button_long.png` | size `190x49` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Sprites/Backgrounds/button_square.png` | size `45x49` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+- `Assets/Sprites/Backgrounds/f.PNG` | size `256x256` | alpha `yes` | transparent margin `0.02` | alpha/background checks passed
+- `Assets/Sprites/Backgrounds/panel.png` | size `100x100` | alpha `yes` | transparent margin `0.00` | alpha/background checks passed
+
+## NeedsCrop
+
+- None
+
+## BakedCheckerboardBackground
+
+- None
+
+## BakedWhiteBackground
+
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Death_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Death_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Death_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Move_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Phase2_Idle.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Phase2_SwarmRage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_PoisonSpit_Release.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_PoisonSpit_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Summon_Release.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/BroodQueen/BroodQueen_Summon_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Cast_Fireball.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Cast_FlameCircle.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Cast_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Death_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Death_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Death_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Move_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Phase2_Rage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Teleport_End.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/EmberMage/EmberMage_Teleport_Start.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Charge_Impact.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Charge_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Death_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Death_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Death_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_LightningCast_Release.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Move_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Phase2_Idle.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Death_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Death_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Death_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Move_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Phase2_Idle.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Phase2_Rage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Shockwave_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Shockwave_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Slam_Impact.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/Titan/Titan_Slam_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/EliteSlime/EliteSlime_Attack_Lunge.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/EliteSlime/EliteSlime_Attack_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/EliteSlime/EliteSlime_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/EliteSlime/EliteSlime_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/EliteSlime/EliteSlime_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/EliteSlime/EliteSlime_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Aim_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Aim_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Death_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Death_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Move_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Recover_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Shoot_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/SkeletonArcher/SkeletonArcher_Warning_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Attack_Lunge.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Attack_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Death_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Move_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Enemies/Slime/Slime_Move_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Charge_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Charge_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Charge_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Dodge_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Dodge_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Run_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Run_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Run_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Run_04.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Shoot_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Shoot_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Cast_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Cast_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Cast_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Channel_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Channel_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Dodge_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Dodge_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Run_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Run_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Run_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Mage/Mage_Run_04.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Attack_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Attack_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Attack_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Dodge_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Dodge_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Idle_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Run_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Run_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Run_03.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_Run_04.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_ShieldBlock_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/AnimationSprites/Player/Warrior/Warrior_ShieldBlock_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Boss_BroodQueen.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Boss_EmberMage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Boss_StormGuard.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Boss_Titan.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Fire/Core_Fire_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Fire/Core_Fire_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Fire/Core_Fire_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Metal/Core_Metal_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Metal/Core_Metal_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Metal/Core_Metal_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Thunder/Core_Thunder_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Thunder/Core_Thunder_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Thunder/Core_Thunder_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Water/Core_Water_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Water/Core_Water_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Water/Core_Water_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Wind/Core_Wind_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Wind/Core_Wind_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Cores/Wind/Core_Wind_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Enemy_SkeletonArcher.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Enemy_Slime.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Enemy_Slime_Elite.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/EnhancedBossBullet.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Doors/Door_BossWarning.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Doors/Door_Locked.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Doors/Door_Open.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Doors/Door_Shop.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Doors/Door_Treasure.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/GroundEffects/BurnMark.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/GroundEffects/GoldDropSpark.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/GroundEffects/LightningMark.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/GroundEffects/PoisonPool.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/GroundEffects/WaterPuddle.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/Chest_Boss_Closed.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/Chest_Boss_Open.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/Chest_Common_Closed.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/Chest_Common_Open.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/Chest_Treasure_Closed.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/Chest_Treasure_Open.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/CoreAltar.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/FateShrine.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/HealingFountain.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/MagicStone.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Interactables/TreasurePedestal.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_Carpet.png` | size `1086x1448` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_ClassStatue.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_InitialChest.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_LampPost.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_MerchantNPC.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_Portal.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_ShopCounter.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_TrainingDummy.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/Lobby/Lobby_WeaponForge.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/Barrel_Wood.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/BonePile.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/Bookshelf_Broken.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/BossRuneCircle.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/Crate_Wood.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/Pillar_Stone.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/Rubble_Stone.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Environment/RoomDecor/ShopDisplayTable.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Archer_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Archer_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Mage_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Mage_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Mage_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Warrior_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Warrior_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Armor/Armor_Warrior_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Consumables/Item_Bomb.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Consumables/Item_HealthPotion.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Consumables/Item_ManaPotion.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Consumables/Item_RerollDice.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Consumables/Item_ReviveFeather.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Skills/Skill_Archer_RainOfArrows.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Skills/Skill_Mage_ArcaneNova.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Skills/Skill_Placeholder.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Items/Skills/Skill_Warrior_ShieldBash.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Player_Archer.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Player_Mage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Player_Sprite.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Player_Warrior.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Projectile_Arrow.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Projectile_ChargedArrow.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Projectile_MageOrb.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Projectile_SkeletonArrow.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Status/Status_Burning.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Status/Status_Electrified.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Status/Status_Shielded.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Status/Status_Wet.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ClassRelics/Treasure_ArcherFocusRing.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ClassRelics/Treasure_MageBlinkSigil.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ClassRelics/Treasure_MageManaPrism.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ClassRelics/Treasure_WarriorOath.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_ArcaneBattery.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_AttackSpeedGear.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_BerserkerBrand.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_ChainLightningRod.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_CritFang.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_ExecutionBlade.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_OrbitingFireCore.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Combat/Treasure_PiercingArrowhead.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Defense/Treasure_BloodShield.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Defense/Treasure_EvasionBoots.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Defense/Treasure_GuardianShell.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Defense/Treasure_SecondWindCloak.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Defense/Treasure_StoneHeart.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Economy/Treasure_GoldenPurse.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Economy/Treasure_GoldMagnet.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Economy/Treasure_MerchantSeal.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Economy/Treasure_ShopRefreshToken.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ElementalShards/Treasure_Shard_Fire.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ElementalShards/Treasure_Shard_Metal.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ElementalShards/Treasure_Shard_Thunder.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ElementalShards/Treasure_Shard_Water.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/ElementalShards/Treasure_Shard_Wind.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Growth/Treasure_BloodSeed.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Growth/Treasure_ManaSeed.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Growth/Treasure_PerfectRoomMedal.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Growth/Treasure_UpgradeRerollToken.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Utility/Treasure_ExtraCoreSocket.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Utility/Treasure_LuckyCompass.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Treasures/Utility/Treasure_RoomScoutMap.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Buttons/Button_Dark_Hover.png` | size `2172x724` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Buttons/Button_Dark_Normal.png` | size `2172x724` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Buttons/Button_Dark_Pressed.png` | size `2172x724` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_EXP_Bar_Back.png` | size `2804x561` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_EXP_Bar_Fill.png` | size `2804x561` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_HP_Bar_Back.png` | size `2508x627` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_HP_Bar_Fill.png` | size `2508x627` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_MP_Bar_Back.png` | size `2508x627` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_MP_Bar_Fill.png` | size `2508x627` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_PlayerStatus_Frame.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/HUD/HUD_TopBar_Frame.png` | size `1672x941` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_ATK.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_BossEssence.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Class_Archer.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Class_Mage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Class_Warrior.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_DEF.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_EXP.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Gold.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_HP.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Item_Armor.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Item_Consumable.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Item_Material.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_Item_Treasure.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Icons/Icon_MP.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Core_Socket_Active.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Core_Socket_Empty.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Inventory_EquipmentSlot_Armor.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Inventory_EquipmentSlot_Weapon.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Inventory_Slot_Empty.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Inventory_Slot_Selected.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Inventory/Treasure_Slot.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Panels/Panel_Main_Dark.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Panels/Panel_Popup_Dark.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/QualityFrames/Quality_Frame_Common.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/QualityFrames/Quality_Frame_Epic.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/QualityFrames/Quality_Frame_Legendary.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/QualityFrames/Quality_Frame_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Shop/Shop_ItemSlot.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/UI/Shop/Shop_TradePanel_Frame.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Archer_ChargeGlow.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Boss_FireRune.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Boss_LightningLine.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Boss_PhaseBurst.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Boss_PoisonPool.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Boss_RockShard.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Mage_BlinkSpark.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Mage_DodgeAfterimage.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Warrior_ShieldBubble.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/VFX_Warrior_SlashArc.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Weapon_ArcherBow.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Weapon_MageStaff.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+- `Assets/Resources/Art2D/Weapon_WarriorSword.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | opaque white border and no alpha transparency
+
+## SuspectedPreviewOrContactSheet
+
+- `Assets/Resources/Art2D/Environment/Walls/Wall_Boss_Horizontal.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | preview/contact/sheet-like name; large image dimensions
+- `Assets/Resources/Art2D/Environment/Walls/Wall_Boss_Vertical.png` | size `1086x1448` | alpha `no` | transparent margin `0.00` | preview/contact/sheet-like name; large image dimensions
+- `Assets/Resources/Art2D/Environment/Walls/Wall_Lobby_Horizontal.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | preview/contact/sheet-like name; large image dimensions
+- `Assets/Resources/Art2D/Environment/Walls/Wall_Lobby_Vertical.png` | size `1086x1448` | alpha `no` | transparent margin `0.00` | preview/contact/sheet-like name; large image dimensions
+- `Assets/Resources/Art2D/Environment/Walls/Wall_Stone_Horizontal.png` | size `1448x1086` | alpha `no` | transparent margin `0.00` | preview/contact/sheet-like name; large image dimensions
+- `Assets/Resources/Art2D/Environment/Walls/Wall_Stone_Vertical.png` | size `1086x1448` | alpha `no` | transparent margin `0.00` | preview/contact/sheet-like name; large image dimensions
+- `Assets/Screenshots/codex-after-update.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/codex-before-update.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/codex-modern-ui-base.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/codex-roguelike-closed-loop.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/modern_rogue_art_pass_verify.png` | size `1198x718` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/ModernRogue_GameView_Final.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/ModernRogue_GameView_Final_NorthCamera.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/ModernRogue_GameView_Verification.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/ModernRogue_Loop_Verification.png` | size `1797x1069` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name; large image dimensions
+- `Assets/Screenshots/screenshot-20260601-175959.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_AfterDoorFormulaFix.png` | size `1198x718` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_Final_HudFixed.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_FixPass.png` | size `1198x718` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_Improved.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_Improved_Final.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_Larger_Readable.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_SemanticPass.png` | size `1198x718` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/SoulKnight_Lobby_SemanticPass_Final.png` | size `1198x718` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+- `Assets/Screenshots/TopDown2D_Verification.png` | size `1198x719` | alpha `no` | transparent margin `0.00` | under Assets/Screenshots; preview/contact/sheet-like name
+
+## NeedsManualReview
+
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Idle_02.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_LightningCast_Windup.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Art2D/AnimationSprites/Bosses/StormGuard/StormGuard_Phase2_Overload.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Art2D/AnimationSprites/Player/Archer/Archer_Hit_01.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Art2D/Environment/Tiles/Floor_BossRoom.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Art2D/Environment/Tiles/Floor_TreasureRoom.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Art2D/Items/Armor/Armor_Archer_Rare.png` | size `1254x1254` | alpha `no` | transparent margin `0.00` | expected transparent sprite but alpha channel is fully opaque
+- `Assets/Resources/Materials/DungeonBrick.png` | size `128x128` | alpha `no` | transparent margin `0.00` | outside known runtime art roots
+- `Assets/Resources/Materials/EnemyRed.png` | size `64x64` | alpha `no` | transparent margin `0.00` | outside known runtime art roots
+- `Assets/Resources/Materials/LootGold.png` | size `64x64` | alpha `no` | transparent margin `0.00` | outside known runtime art roots
+- `Assets/Resources/Materials/PlayerBlue.png` | size `64x64` | alpha `no` | transparent margin `0.00` | outside known runtime art roots
