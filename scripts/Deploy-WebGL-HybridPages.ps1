@@ -9,6 +9,7 @@ $root = Split-Path $PSScriptRoot -Parent
 Set-Location $root
 
 $jsdelivr = "https://cdn.jsdelivr.net/gh/Sasukrystal/1@webgl-cdn/Build"
+$pagesBuild = "https://sasukrystal.github.io/1/Build"
 $staging = Join-Path $root "Builds\_gh_pages_hybrid"
 if (Test-Path $staging) { Remove-Item $staging -Recurse -Force }
 New-Item -ItemType Directory -Path (Join-Path $staging "Build") | Out-Null
@@ -16,13 +17,30 @@ Copy-Item WebGLDeploy\index.html $staging\
 Copy-Item WebGLDeploy\.nojekyll $staging\
 Copy-Item WebGLDeploy\TemplateData $staging\TemplateData -Recurse
 
-$proxyArg = if ($ProxyUrl) { @("-x", $ProxyUrl) } else { @() }
+function Get-BuildFile($name) {
+    param([string]$FileName)
+    $dest = Join-Path $staging "Build\$FileName"
+    $sources = @(
+        "$jsdelivr/$FileName",
+        "$pagesBuild/$FileName"
+    )
+    foreach ($url in $sources) {
+        Write-Host "Downloading $FileName from $url ..."
+        if ($ProxyUrl) {
+            & curl.exe -x $ProxyUrl -fsSL --retry 2 -o $dest $url 2>$null
+        } else {
+            & curl.exe -fsSL --retry 2 -o $dest $url 2>$null
+        }
+        if ((Test-Path $dest) -and ((Get-Item $dest).Length -gt 1000)) {
+            Write-Host "  -> $((Get-Item $dest).Length) bytes"
+            return
+        }
+    }
+    Write-Error "Download failed: $FileName"
+}
+
 foreach ($f in @("WebGL.loader.js", "WebGL.framework.js.unityweb", "WebGL.wasm.unityweb")) {
-    Write-Host "Downloading $f ..."
-    & curl.exe @proxyArg -fsSL --retry 3 -o (Join-Path $staging "Build\$f") "$jsdelivr/$f"
-    $size = (Get-Item (Join-Path $staging "Build\$f")).Length
-    Write-Host "  -> $size bytes"
-    if ($size -lt 1000) { Write-Error "Download failed or LFS pointer: $f" }
+    Get-BuildFile $f
 }
 
 Push-Location $staging

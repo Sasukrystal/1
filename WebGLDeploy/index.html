@@ -51,19 +51,62 @@
         updateBannerVisibility();
       }
 
-      // loader / wasm / framework same-origin (avoids Edge Tracking Prevention on third-party storage).
-      // data file too large for git; served from GitHub LFS media CDN with CORS.
+      function clearUnityCache() {
+        if (!window.indexedDB || !indexedDB.databases) return Promise.resolve();
+        return indexedDB.databases().then(function(dbs) {
+          return Promise.all(dbs.map(function(db) {
+            if (!db.name) return Promise.resolve();
+            if (db.name.indexOf('Unity') >= 0 || db.name.indexOf('EMFS') >= 0 || db.name.indexOf('idbfs') >= 0) {
+              return new Promise(function(resolve) {
+                var req = indexedDB.deleteDatabase(db.name);
+                req.onsuccess = req.onerror = req.onblocked = function() { resolve(); };
+              });
+            }
+            return Promise.resolve();
+          }));
+        }).catch(function() {});
+      }
+
+      function fetchAsBlobUrl(url, onProgress) {
+        return fetch(url, { cache: 'no-store' }).then(function(response) {
+          if (!response.ok) throw new Error('Download failed (' + response.status + '): ' + url);
+          var total = Number(response.headers.get('Content-Length') || 0);
+          if (!response.body || !response.body.getReader) {
+            return response.arrayBuffer().then(function(buf) {
+              if (onProgress) onProgress(1);
+              return URL.createObjectURL(new Blob([buf]));
+            });
+          }
+          var reader = response.body.getReader();
+          var chunks = [];
+          var received = 0;
+          function pump() {
+            return reader.read().then(function(result) {
+              if (result.done) {
+                if (onProgress) onProgress(1);
+                return URL.createObjectURL(new Blob(chunks));
+              }
+              chunks.push(result.value);
+              received += result.value.length;
+              if (onProgress && total > 0) onProgress(received / total);
+              return pump();
+            });
+          }
+          return pump();
+        });
+      }
+
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
-      var dataCdn = "https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build/WebGL.data.unityweb?v=4";
+      var dataRemote = "https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build/WebGL.data.unityweb?v=5";
       var config = {
-        dataUrl: dataCdn,
+        dataUrl: "",
         frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
         codeUrl: buildUrl + "/WebGL.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DarkDungeon Team",
         productName: "黑暗地牢",
-        productVersion: "0.1.0",
+        productVersion: "0.1.1",
         showBanner: unityShowBanner,
       };
 
@@ -76,17 +119,30 @@
       }
 
       loadingBar.style.display = "block";
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => { unityInstance.SetFullscreen(1); };
-        }).catch((message) => { alert(message); });
-      };
-      document.body.appendChild(script);
+
+      clearUnityCache().then(function() {
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = function() {
+          fetchAsBlobUrl(dataRemote, function(downloadProgress) {
+            progressBarFull.style.width = (downloadProgress * 70) + "%";
+          }).then(function(blobUrl) {
+            config.dataUrl = blobUrl;
+            return createUnityInstance(canvas, config, function(progress) {
+              progressBarFull.style.width = (70 + progress * 30) + "%";
+            });
+          }).then(function(unityInstance) {
+            loadingBar.style.display = "none";
+            fullscreenButton.onclick = function() { unityInstance.SetFullscreen(1); };
+          }).catch(function(message) {
+            alert(message);
+          });
+        };
+        script.onerror = function() {
+          alert("Failed to load WebGL.loader.js");
+        };
+        document.body.appendChild(script);
+      });
     </script>
   </body>
 </html>
