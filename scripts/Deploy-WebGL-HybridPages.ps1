@@ -17,7 +17,7 @@ Copy-Item WebGLDeploy\index.html $staging\
 Copy-Item WebGLDeploy\.nojekyll $staging\
 Copy-Item WebGLDeploy\TemplateData $staging\TemplateData -Recurse
 
-function Get-BuildFile($name) {
+function Get-BuildFile {
     param([string]$FileName)
     $dest = Join-Path $staging "Build\$FileName"
     $sources = @(
