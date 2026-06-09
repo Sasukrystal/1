@@ -74,7 +74,7 @@
           if (!response.body || !response.body.getReader) {
             return response.arrayBuffer().then(function(buf) {
               if (onProgress) onProgress(1);
-              return URL.createObjectURL(new Blob([buf]));
+              return URL.createObjectURL(new Blob([buf], { type: 'application/octet-stream' }));
             });
           }
           var reader = response.body.getReader();
@@ -83,8 +83,14 @@
           function pump() {
             return reader.read().then(function(result) {
               if (result.done) {
+                var merged = new Uint8Array(received);
+                var offset = 0;
+                for (var i = 0; i < chunks.length; i++) {
+                  merged.set(chunks[i], offset);
+                  offset += chunks[i].length;
+                }
                 if (onProgress) onProgress(1);
-                return URL.createObjectURL(new Blob(chunks));
+                return URL.createObjectURL(new Blob([merged], { type: 'application/octet-stream' }));
               }
               chunks.push(result.value);
               received += result.value.length;
@@ -96,17 +102,38 @@
         });
       }
 
+      function downloadAllAssets(items, onTotalProgress) {
+        var weights = items.map(function(it) { return it.weight; });
+        var totalWeight = weights.reduce(function(a, b) { return a + b; }, 0);
+        var partProgress = items.map(function() { return 0; });
+        function updateTotal() {
+          var sum = 0;
+          for (var i = 0; i < items.length; i++) sum += partProgress[i] * weights[i];
+          if (onTotalProgress) onTotalProgress(sum / totalWeight);
+        }
+        return Promise.all(items.map(function(item, index) {
+          return fetchAsBlobUrl(item.url, function(p) {
+            partProgress[index] = p;
+            updateTotal();
+          }).then(function(blobUrl) {
+            partProgress[index] = 1;
+            updateTotal();
+            return blobUrl;
+          });
+        }));
+      }
+
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL.loader.js";
-      var dataRemote = "https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build/WebGL.data.unityweb?v=5";
+      var loaderUrl = buildUrl + "/WebGL.loader.js?v=6";
+      var dataRemote = "https://media.githubusercontent.com/media/Sasukrystal/1/webgl-cdn/Build/WebGL.data.unityweb?v=6";
       var config = {
         dataUrl: "",
-        frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
-        codeUrl: buildUrl + "/WebGL.wasm.unityweb",
+        frameworkUrl: "",
+        codeUrl: "",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DarkDungeon Team",
         productName: "黑暗地牢",
-        productVersion: "0.1.1",
+        productVersion: "0.1.2",
         showBanner: unityShowBanner,
       };
 
@@ -124,18 +151,24 @@
         var script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = function() {
-          fetchAsBlobUrl(dataRemote, function(downloadProgress) {
-            progressBarFull.style.width = (downloadProgress * 70) + "%";
-          }).then(function(blobUrl) {
-            config.dataUrl = blobUrl;
+          downloadAllAssets([
+            { url: dataRemote, weight: 171 },
+            { url: buildUrl + "/WebGL.wasm.unityweb?v=6", weight: 5 },
+            { url: buildUrl + "/WebGL.framework.js.unityweb?v=6", weight: 1 }
+          ], function(downloadProgress) {
+            progressBarFull.style.width = (downloadProgress * 85) + "%";
+          }).then(function(blobUrls) {
+            config.dataUrl = blobUrls[0];
+            config.codeUrl = blobUrls[1];
+            config.frameworkUrl = blobUrls[2];
             return createUnityInstance(canvas, config, function(progress) {
-              progressBarFull.style.width = (70 + progress * 30) + "%";
+              progressBarFull.style.width = (85 + progress * 15) + "%";
             });
           }).then(function(unityInstance) {
             loadingBar.style.display = "none";
             fullscreenButton.onclick = function() { unityInstance.SetFullscreen(1); };
           }).catch(function(message) {
-            alert(message);
+            alert(typeof message === 'string' ? message : (message && message.message) || message);
           });
         };
         script.onerror = function() {

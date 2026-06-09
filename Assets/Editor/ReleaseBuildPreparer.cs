@@ -10,8 +10,11 @@ namespace ModernRogue.EditorTools
         private const string MainScenePath = "Assets/Scenes/Main.unity";
         private const string StreamingAssetsRoot = "Assets/StreamingAssets";
         private const string DefaultBuildFolder = "Builds/Windows";
+        private const string WebGLBuildFolder = "Builds/WebGL";
         private const string AutoBuildFlagFile = "Builds/auto_build_requested.txt";
+        private const string AutoWebGLBuildFlagFile = "Builds/auto_webgl_build_requested.txt";
         private const string CoreSourceFolderName = "核心代码";
+        private const string GitHubPagesBaseHref = "/1/";
 
         [MenuItem("Modern Rogue/Prepare Release Build", priority = 0)]
         public static void PrepareReleaseBuild()
@@ -47,7 +50,59 @@ namespace ModernRogue.EditorTools
             Debug.Log("[ReleaseBuildPreparer] 核心代码已同步到 " + DefaultBuildFolder + "/" + CoreSourceFolderName);
         }
 
-        [MenuItem("Modern Rogue/Build Windows Release", priority = 1)]
+        [MenuItem("Modern Rogue/Build WebGL Release", priority = 4)]
+        public static void BuildWebGLRelease()
+        {
+            PrepareReleaseBuild();
+            ConfigureWebGLPlayerSettings();
+
+            string outputDir = Path.GetFullPath(Path.Combine(Application.dataPath, "..", WebGLBuildFolder));
+            if (Directory.Exists(outputDir))
+            {
+                Directory.Delete(outputDir, true);
+            }
+
+            Directory.CreateDirectory(outputDir);
+
+            BuildPlayerOptions options = new BuildPlayerOptions
+            {
+                scenes = GetEnabledScenePaths(),
+                locationPathName = outputDir,
+                target = BuildTarget.WebGL,
+                options = BuildOptions.None
+            };
+
+            BuildReport report = BuildPipeline.BuildPlayer(options);
+            if (report.summary.result == BuildResult.Succeeded)
+            {
+                PatchWebGlIndexForGitHubPages(outputDir);
+                EditorUtility.RevealInFinder(Path.Combine(outputDir, "index.html"));
+                Debug.Log("[ReleaseBuildPreparer] WebGL 发布包已生成: " + outputDir);
+            }
+            else
+            {
+                Debug.LogError("[ReleaseBuildPreparer] WebGL 构建失败: " + report.summary.result);
+            }
+        }
+
+        public static void RequestAutoWebGLBuild()
+        {
+            string flagPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", AutoWebGLBuildFlagFile));
+            Directory.CreateDirectory(Path.GetDirectoryName(flagPath));
+            File.WriteAllText(flagPath, System.DateTime.UtcNow.ToString("O"));
+            Debug.Log("[ReleaseBuildPreparer] 已请求自动 WebGL 打包，Unity 编译完成后会开始构建。");
+        }
+
+        [MenuItem("Modern Rogue/Build WebGL And Publish GitHub Pages", priority = 5)]
+        public static void BuildWebGLAndRequestPublish()
+        {
+            BuildWebGLRelease();
+            string flagPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Builds/webgl_publish_requested.txt"));
+            Directory.CreateDirectory(Path.GetDirectoryName(flagPath));
+            File.WriteAllText(flagPath, System.DateTime.UtcNow.ToString("O"));
+            Debug.Log("[ReleaseBuildPreparer] WebGL 构建完成。请在项目根目录运行: .\\scripts\\Publish-WebGL-GitHubPages.ps1");
+        }
+
         public static void BuildWindowsRelease()
         {
             PrepareReleaseBuild();
@@ -97,8 +152,37 @@ namespace ModernRogue.EditorTools
                 }
 
                 TryRunPendingAutoBuild();
+                TryRunPendingAutoWebGLBuild();
             };
         }
+
+        private static void TryRunPendingAutoWebGLBuild()
+        {
+            string flagPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", AutoWebGLBuildFlagFile));
+            if (!File.Exists(flagPath))
+            {
+                return;
+            }
+
+            if (EditorApplication.isCompiling || EditorApplication.isUpdating)
+            {
+                EditorApplication.delayCall += TryRunPendingAutoWebGLBuild;
+                return;
+            }
+
+            try
+            {
+                File.Delete(flagPath);
+            }
+            catch
+            {
+            }
+
+            Debug.Log("[ReleaseBuildPreparer] 检测到自动 WebGL 打包请求，开始 Build WebGL Release...");
+            BuildWebGLRelease();
+        }
+
+        [MenuItem("Modern Rogue/Build Windows Release", priority = 1)]
 
         public static void RequestAutoBuild()
         {
@@ -143,6 +227,41 @@ namespace ModernRogue.EditorTools
             PlayerSettings.defaultScreenHeight = 1080;
             PlayerSettings.fullScreenMode = FullScreenMode.FullScreenWindow;
             PlayerSettings.SetScriptingBackend(BuildTargetGroup.Standalone, ScriptingImplementation.Mono2x);
+        }
+
+        private static void ConfigureWebGLPlayerSettings()
+        {
+            PlayerSettings.companyName = "DarkDungeon Team";
+            PlayerSettings.productName = "黑暗地牢";
+            PlayerSettings.bundleVersion = "0.1.0";
+            PlayerSettings.defaultWebScreenWidth = 1280;
+            PlayerSettings.defaultWebScreenHeight = 720;
+            PlayerSettings.runInBackground = true;
+            PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+            PlayerSettings.WebGL.decompressionFallback = false;
+            PlayerSettings.WebGL.memorySize = 512;
+            PlayerSettings.WebGL.dataCaching = false;
+        }
+
+        private static void PatchWebGlIndexForGitHubPages(string outputDir)
+        {
+            string indexPath = Path.Combine(outputDir, "index.html");
+            if (!File.Exists(indexPath))
+            {
+                Debug.LogWarning("[ReleaseBuildPreparer] 未找到 WebGL index.html，跳过 GitHub Pages 路径修正。");
+                return;
+            }
+
+            string html = File.ReadAllText(indexPath);
+            string baseTag = "<base href=\"" + GitHubPagesBaseHref + "\">";
+            if (html.IndexOf("<base href", System.StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                html = html.Replace("<head>", "<head>\n    " + baseTag);
+                File.WriteAllText(indexPath, html);
+            }
+
+            string noJekyllPath = Path.Combine(outputDir, ".nojekyll");
+            File.WriteAllText(noJekyllPath, string.Empty);
         }
 
         private static void ConfigureBuildScenes()
